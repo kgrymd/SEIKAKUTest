@@ -45,8 +45,10 @@ $(document).ready(function () {
             currentQuestionIndex++;
             displayQuestion();
         } else {
-            $("#result").text("結果はこちら↓");
+            // $("#result").text("結果はこちら↓");
             const accuracy = calculateAccuracy(touchPoints);
+            $("#result").text(`タッチの正確さ: ${accuracy}`);
+
             $(".answer-button").off("click");
             $("#result-button").show();
         }
