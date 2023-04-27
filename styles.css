@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+#app {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.answer-button {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    font-size: 16px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+}
