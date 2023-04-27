@@ -45,9 +45,9 @@ $(document).ready(function () {
             currentQuestionIndex++;
             displayQuestion();
         } else {
-            // $("#result").text("結果はこちら↓");
+            $("#result").text("結果はこちら↓");
             const accuracy = calculateAccuracy(touchPoints);
-            $("#result").text(`タッチの正確さ: ${accuracy}`);
+            // $("#result").text(`タッチの正確さ: ${accuracy}`);//値調整の確認用
 
             $(".answer-button").off("click");
             $("#result-button").show();
@@ -58,7 +58,7 @@ $(document).ready(function () {
             const accuracy = calculateAccuracy(touchPoints);
             if (accuracy < 25) {
                 window.location.href = `result1.html`;
-            } else if (accuracy > 50) {
+            } else if (accuracy > 35) {
                 window.location.href = `result2.html`
             } else {
                 window.location.href = `result3.html`
