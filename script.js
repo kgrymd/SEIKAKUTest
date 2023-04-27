@@ -56,9 +56,9 @@ $(document).ready(function () {
         // 結果ページへのリンクボタンがクリックされたときの処理
         $("#result-button").on("click", function () {
             const accuracy = calculateAccuracy(touchPoints);
-            if (accuracy < 20) {
+            if (accuracy < 25) {
                 window.location.href = `result1.html`;
-            } else if (accuracy > 25) {
+            } else if (accuracy > 50) {
                 window.location.href = `result2.html`
             } else {
                 window.location.href = `result3.html`
