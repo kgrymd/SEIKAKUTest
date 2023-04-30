@@ -20,6 +20,7 @@ $(document).ready(function () {
     let touchPoints = [];
 
     function displayQuestion() {
+        $("#nOfQuestions").text(`第${currentQuestionIndex + 1}問`);
         const question = questions[currentQuestionIndex];
         $("#question").text(question.question);
         $("#choices").text(question.choices);
