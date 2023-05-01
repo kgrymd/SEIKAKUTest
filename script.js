@@ -18,6 +18,7 @@ $(document).ready(function () {
 
     let currentQuestionIndex = 0;
     let touchPoints = [];
+    let timer = null;
 
     function displayQuestion() {
         $("#nOfQuestions").text(`第${currentQuestionIndex + 1}問`);
@@ -26,7 +27,42 @@ $(document).ready(function () {
         $("#choices").text(question.choices);
         $("#button1").text(question.answers[0]);
         $("#button2").text(question.answers[1]);
+        startTimer();
     }
+
+    function updateTimerDisplay() {
+        $("#timer").text(timeLeft);
+    }
+
+    function startTimer() {
+        timeLeft = 10;
+        updateTimerDisplay();
+        timer = setInterval(function () {
+            timeLeft--;
+            updateTimerDisplay();
+            if (timeLeft <= 0) {
+                proceedToNextQuestion();
+            }
+        }, 1000);
+    }
+
+
+    function proceedToNextQuestion() {
+        if (timer !== null) {
+            clearInterval(timer);
+        }
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+            displayQuestion();
+        } else {
+            $("#timer-container").hide(); // カウントダウン表示を消す
+            $("#result").text("結果はこちら↓");
+            const accuracy = calculateAccuracy(touchPoints);
+            $(".answer-button").off("click");
+            $("#result-button").show();
+        }
+    }
+
 
     function calculateAccuracy(points) {
         const totalDistance = points.reduce((total, point) => {
@@ -42,29 +78,18 @@ $(document).ready(function () {
         const offsetY = event.offsetY - clickedButton.height() / 2;
         touchPoints.push({ x: offsetX, y: offsetY });
 
-        if (currentQuestionIndex < questions.length - 1) {
-            currentQuestionIndex++;
-            displayQuestion();
+        proceedToNextQuestion();
+    });
+
+    $("#result-button").on("click", function () {
+        const accuracy = calculateAccuracy(touchPoints);
+        if (accuracy < 21) {
+            window.location.href = `result1.html`;
+        } else if (accuracy > 35) {
+            window.location.href = `result2.html`;
         } else {
-            $("#result").text("結果はこちら↓");
-            const accuracy = calculateAccuracy(touchPoints);
-            // $("#result").text(`タッチの正確さ: ${accuracy}`);//値調整の確認用
-
-            $(".answer-button").off("click");
-            $("#result-button").show();
+            window.location.href = `result3.html`;
         }
-
-        // 結果ページへのリンクボタンがクリックされたときの処理
-        $("#result-button").on("click", function () {
-            const accuracy = calculateAccuracy(touchPoints);
-            if (accuracy < 21) {
-                window.location.href = `result1.html`;
-            } else if (accuracy > 35) {
-                window.location.href = `result2.html`
-            } else {
-                window.location.href = `result3.html`
-            }
-        });
     });
 
     displayQuestion();
