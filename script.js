@@ -83,7 +83,9 @@ $(document).ready(function () {
 
     $("#result-button").on("click", function () {
         const accuracy = calculateAccuracy(touchPoints);
-        if (accuracy < 21) {
+        if (accuracy < 15) {
+            window.location.href = `result4.html`;
+        } else if (accuracy < 21) {
             window.location.href = `result1.html`;
         } else if (accuracy > 35) {
             window.location.href = `result2.html`;
